@@ -1,0 +1,156 @@
+[
+  {
+    "Name": "cmd",
+    "IsCanDelete": false,
+    "Code": "cmd",
+    "IDGuid": "9831900f-2e91-4973-b014-8e59cd1c843e",
+    "Tags": []
+  },
+  {
+    "Name": "PowerShell",
+    "IsCanDelete": false,
+    "Code": "PowerShell",
+    "IDGuid": "5fbec09b-7e28-4c61-bd76-b4264c545915",
+    "Tags": []
+  },
+  {
+    "Name": "记事本",
+    "IsCanDelete": false,
+    "Code": "notepad",
+    "IDGuid": "ae328964-b2cc-4d4b-abe3-266eaae567c8",
+    "Tags": []
+  },
+  {
+    "Name": "计算器",
+    "IsCanDelete": false,
+    "Code": "calc",
+    "IDGuid": "44acc566-5da6-44cd-8af6-114d6f92dd5f",
+    "Tags": []
+  },
+  {
+    "Name": "屏幕键盘",
+    "IsCanDelete": false,
+    "Code": "osk",
+    "IDGuid": "7dccd27f-8108-4a72-bc91-af49c37632f9",
+    "Tags": []
+  },
+  {
+    "Name": "控制面板",
+    "IsCanDelete": false,
+    "Code": "control",
+    "IDGuid": "2575c375-cc13-443c-bce0-3687dc70aabb",
+    "Tags": []
+  },
+  {
+    "Name": "系统设置",
+    "IsCanDelete": false,
+    "Code": "ms-settings:",
+    "IDGuid": "d0a1b989-f793-454c-b3d4-fc79b4cd3717",
+    "Tags": []
+  },
+  {
+    "Name": "系统信息",
+    "IsCanDelete": false,
+    "Code": "msinfo32",
+    "IDGuid": "c099edf4-ec7f-4c5b-ae93-b8e710fc11ef",
+    "Tags": []
+  },
+  {
+    "Name": "程序和功能",
+    "IsCanDelete": false,
+    "Code": "appwiz.cpl",
+    "IDGuid": "5540e672-943c-4a9a-90a7-81c683ee96a4",
+    "Tags": []
+  },
+  {
+    "Name": "设备管理器",
+    "IsCanDelete": false,
+    "Code": "devmgmt.msc",
+    "IDGuid": "b55031c7-1329-48c5-a024-080088316af3",
+    "Tags": []
+  },
+  {
+    "Name": "计算机管理",
+    "IsCanDelete": false,
+    "Code": "compmgmt.msc",
+    "IDGuid": "c536bd22-16b5-4f62-9094-4dbed3822226",
+    "Tags": []
+  },
+  {
+    "Name": "磁盘管理",
+    "IsCanDelete": false,
+    "Code": "diskmgmt.msc",
+    "IDGuid": "85b77271-a5fe-4188-95d4-3799b3569b74",
+    "Tags": []
+  },
+  {
+    "Name": "网络连接",
+    "IsCanDelete": false,
+    "Code": "ncpa.cpl",
+    "IDGuid": "6a1f8546-d6c1-4b6c-9ed1-8ee92d3eef62",
+    "Tags": []
+  },
+  {
+    "Name": "防火墙",
+    "IsCanDelete": false,
+    "Code": "firewall.cpl",
+    "IDGuid": "37ea5938-fb07-4947-ad49-4c53ef048924",
+    "Tags": []
+  },
+  {
+    "Name": "防火墙规则",
+    "IsCanDelete": false,
+    "Code": "wf.msc",
+    "IDGuid": "3da57a2e-39e6-4048-aca6-4ddc01ffef20",
+    "Tags": []
+  },
+  {
+    "Name": "注册表",
+    "IsCanDelete": false,
+    "Code": "regedit",
+    "IDGuid": "bca7c36c-eaf4-4801-acdb-e89bbbc1f7fa",
+    "Tags": []
+  },
+  {
+    "Name": "组策略",
+    "IsCanDelete": false,
+    "Code": "gpedit.msc",
+    "IDGuid": "8681a24b-ae48-4197-8d3c-9bd242afa0c9",
+    "Tags": []
+  },
+  {
+    "Name": "远程控制",
+    "IsCanDelete": false,
+    "Code": "mstsc",
+    "IDGuid": "ea8edb1c-cf49-49a9-b6e2-e54a09d7200a",
+    "Tags": []
+  },
+  {
+    "Name": "开机启动",
+    "IsCanDelete": false,
+    "Code": "shell:startup",
+    "IDGuid": "60d818b3-0e94-47e3-8078-2e61a6fa4a19",
+    "Tags": []
+  },
+  {
+    "Name": "服务",
+    "IsCanDelete": false,
+    "Code": "services.msc",
+    "IDGuid": "6f0c2574-f023-479f-9832-de8b83c6e4b4",
+    "Tags": []
+  },
+  {
+    "Name": "电源选项",
+    "IsCanDelete": false,
+    "Code": "powercfg.cpl",
+    "IDGuid": "8b3d523f-ed77-49f6-889d-bd3687c0b860",
+    "Tags": []
+  },
+  {
+    "Name": "屏幕分辨率",
+    "IsCanDelete": false,
+    "Code": " desk.cpl",
+    "IDGuid": "6f7381e3-5158-4881-bd4b-e5dbd76867fc",
+    "Tags": []
+  }
+]

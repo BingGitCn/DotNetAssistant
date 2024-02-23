@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="DotNetAssistant.Views.CodeWin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:i="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:DotNetAssistant.Views"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <avalonEdit:TextEditor
+            Name="textEditor"
+            FontFamily="Consolas"
+            FontSize="12pt"
+            Loaded="textEditor_Loaded"
+            ShowLineNumbers="True"
+            SyntaxHighlighting="C#">
+            <i:Interaction.Behaviors>
+                <local:AvalonEditBehaviour GiveMeTheText="{Binding Codes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </i:Interaction.Behaviors>
+        </avalonEdit:TextEditor>
+    </Grid>
+</UserControl>
