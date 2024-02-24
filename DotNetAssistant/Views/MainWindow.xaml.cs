@@ -21,7 +21,12 @@ namespace DotNetAssistant.Views
         {
             e.Cancel = true;
             if (GlobalVars.ShowConfirm("确认退出软件？"))
+            {
+                // 注销全局快捷键
+                IntPtr hWnd = new WindowInteropHelper(this).Handle;
+                UnregisterHotKey(hWnd, 1);
                 Environment.Exit(0);
+            }
         }
 
         private const int WM_HOTKEY = 0x0312;
@@ -50,7 +55,6 @@ namespace DotNetAssistant.Views
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-            Closing += MainWindow_Closing;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -66,13 +70,6 @@ namespace DotNetAssistant.Views
         {
             if (WindowState == WindowState.Minimized)
                 Hide();
-        }
-
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // 注销全局快捷键
-            IntPtr hWnd = new WindowInteropHelper(this).Handle;
-            UnregisterHotKey(hWnd, 1);
         }
 
         private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)

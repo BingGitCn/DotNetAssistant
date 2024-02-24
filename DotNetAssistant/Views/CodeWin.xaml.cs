@@ -68,9 +68,15 @@ namespace DotNetAssistant.Views
                 var editor = behavior.AssociatedObject as TextEditor;
                 if (editor.Document != null)
                 {
-                    // var caretOffset = editor.CaretOffset;
-                    editor.Document.Text = dependencyPropertyChangedEventArgs.NewValue.ToString();
-                    //editor.CaretOffset = caretOffset;
+                    try
+                    {
+                        //这里保存鼠标位置
+                        var caretOffset = editor.CaretOffset;
+                        editor.Document.Text = dependencyPropertyChangedEventArgs.NewValue.ToString();
+                        //还原鼠标位置
+                        editor.CaretOffset = caretOffset;
+                    }
+                    catch { editor.Document.Text = dependencyPropertyChangedEventArgs.NewValue.ToString(); }
                 }
             }
         }
