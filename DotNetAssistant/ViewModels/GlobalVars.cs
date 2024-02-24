@@ -21,6 +21,8 @@ namespace DotNetAssistant.ViewModels
         public static PubSubEvent StartGetCodesEventArgs = new PubSubEvent();
         public static PubSubEvent<string> GetCodesEventArgs = new PubSubEvent<string>();
 
+        public static SystemConfig systemConfig = new SystemConfig();
+
         public static T ReadJson<T>(string jsonFileName)
         {
             FileInfo fileInfo = new FileInfo(jsonFileName);
@@ -93,5 +95,10 @@ namespace DotNetAssistant.ViewModels
 
         [ObservableProperty]
         private bool isSelected;
+    }
+
+    public class SystemConfig
+    {
+        public bool IsTopCrop { set; get; } = false;
     }
 }

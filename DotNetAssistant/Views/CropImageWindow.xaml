@@ -1,0 +1,48 @@
+﻿<Window x:Class="DotNetAssistant.Views.CropImageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CropImageWindow"
+        Width="800"
+        Height="450"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Window.Resources>
+        <!-- 定义边框闪烁的动画 -->
+        <Storyboard x:Key="BlinkAnimation" RepeatBehavior="Forever">
+            <ColorAnimation
+                Storyboard.TargetName="border"
+                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                From="Black"
+                To="DeepSkyBlue"  
+                AutoReverse="True"
+                Duration="0:0:2" />
+                <!-- 将持续时间调整为2秒 -->
+                <ThicknessAnimation
+                Storyboard.TargetName="border"
+                Storyboard.TargetProperty="BorderThickness"
+                From="1"
+                To="3"
+                AutoReverse="True"
+                Duration="0:0:2" />
+                <!-- 将持续时间调整为2秒 -->
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Border x:Name="border"
+                Background="Transparent"
+                BorderThickness="1"
+                BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="Red"/>
+            </Border.Effect>
+            <Image x:Name="img" Margin="1" />
+        </Border>
+    </Grid>
+    <Window.Triggers>
+        <!-- 在窗口加载时开始闪烁动画 -->
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard Storyboard="{StaticResource BlinkAnimation}" />
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

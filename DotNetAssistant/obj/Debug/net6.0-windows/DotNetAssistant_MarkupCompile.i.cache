@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\App.xaml
-3-1749332308
+4-1880688800
 11913261121
-10902232399
+11715999917
 212-334041264
-Views\CodeWin.xaml;Views\MainWindow.xaml;Views\ToolWin.xaml;
+Views\CodeWin.xaml;Views\CropImageWindow.xaml;Views\MainWindow.xaml;Views\ToolWin.xaml;
 
-False
+True
 

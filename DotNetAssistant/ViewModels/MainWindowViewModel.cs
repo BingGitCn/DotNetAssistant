@@ -50,10 +50,21 @@ namespace DotNetAssistant.ViewModels
             this.regionManager = regionManager;
             GlobalVars.GetCodesEventArgs.Subscribe(GetCodes);
             init();
+
+            _ = UpdateToolRegion();
         }
 
         private async void init()
         {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "SystemConfig.json"))
+            {
+                GlobalVars.systemConfig = GlobalVars.ReadJson<SystemConfig>(AppDomain.CurrentDomain.BaseDirectory + "SystemConfig.json");
+            }
+            else
+            {
+                GlobalVars.WriteJson(GlobalVars.systemConfig, AppDomain.CurrentDomain.BaseDirectory + "SystemConfig.json");
+            }
+
             totalToolList.Clear();
 
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Tools.json"))
@@ -234,6 +245,8 @@ namespace DotNetAssistant.ViewModels
         [RelayCommand]
         private async Task UpdateToolRegion()
         {
+            await Task.Delay(10);
+
             if (SelectTabIndex == 1 && isNeedToUpdateToolRegion)
             {
                 regionManager.Regions["ToolRegion"].RequestNavigate("CodeWin");

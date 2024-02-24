@@ -37,3 +37,5 @@ F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\bin\Debug\net6.0-windows\P
 F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\bin\Debug\net6.0-windows\Prism.Wpf.dll
 F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\obj\Debug\net6.0-windows\DotNetAs.CAF4383A.Up2Date
 F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\obj\Debug\net6.0-windows\DotNetAssistant.sourcelink.json
+F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\obj\Debug\net6.0-windows\Views\CropImageWindow.g.cs
+F:\WORK\代码\自制\DotNetAssistant\DotNetAssistant\obj\Debug\net6.0-windows\Views\CropImageWindow.baml
