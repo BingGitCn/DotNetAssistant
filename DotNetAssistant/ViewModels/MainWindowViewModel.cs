@@ -20,6 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Runtime.InteropServices;
 
 namespace DotNetAssistant.ViewModels
 {
@@ -61,14 +62,14 @@ namespace DotNetAssistant.ViewModels
             }
             else
             {
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "cmd", Code = "cmd" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "PowerShell", Code = "PowerShell" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "记事本", Code = "notepad" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "计算器", Code = "calc" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "屏幕键盘", Code = "osk" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "控制面板", Code = "control" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "cmd", Code = "cmd.exe" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "PowerShell", Code = "PowerShell.exe" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "记事本", Code = "notepad.exe" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "计算器", Code = "calc.exe" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "屏幕键盘", Code = "osk.exe" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "控制面板", Code = "control.exe" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "系统设置", Code = "ms-settings:" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "系统信息", Code = "msinfo32" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "系统信息", Code = "msinfo32.exe" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "程序和功能", Code = "appwiz.cpl" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "设备管理器", Code = "devmgmt.msc" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "计算机管理", Code = "compmgmt.msc" });
@@ -78,7 +79,7 @@ namespace DotNetAssistant.ViewModels
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "防火墙规则", Code = "wf.msc" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "注册表", Code = "regedit" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "组策略", Code = "gpedit.msc" });
-                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "远程控制", Code = "mstsc" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "远程控制", Code = "mstsc.exe" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "开机启动", Code = "shell:startup" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "服务", Code = "services.msc" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "电源选项", Code = "powercfg.cpl" });
@@ -89,7 +90,7 @@ namespace DotNetAssistant.ViewModels
             {
                 try
                 {
-                    totalToolList[i].ToolIcon = GetFileIcon(totalToolList[i].Code);
+                    totalToolList[i].ToolIcon = GetFileIcon(totalToolList[i].Code, totalToolList[i].IsCanDelete);
                 }
                 catch { }
             }
@@ -126,7 +127,7 @@ namespace DotNetAssistant.ViewModels
             {
                 if (SelectTabIndex == 0)
                 {
-                    var result = totalToolList.Where(s => s.Name.Contains(SearchCode)).ToList();
+                    var result = totalToolList.Where(s => s.Name.ToUpper().Contains(SearchCode.ToUpper())).ToList();
                     ToolList.Clear();
                     foreach (var item in result)
                     {
@@ -428,18 +429,87 @@ namespace DotNetAssistant.ViewModels
             catch { }
         }
 
-        private Icon GetFileIcon(string filePath)
+        private Icon GetFileIcon(string filePath, bool isCanDelete)
         {
             Icon icon = null;
             try
             {
                 // 提取与文件关联的图标
-                icon = Icon.ExtractAssociatedIcon(filePath);
+                if (isCanDelete)
+                    icon = Icon.ExtractAssociatedIcon(filePath);
+                else
+                {
+                    if (filePath.EndsWith(".exe") || filePath.EndsWith(".lnk"))
+                    {
+                        icon = Icon.ExtractAssociatedIcon(Environment.ExpandEnvironmentVariables($"%SystemRoot%\\System32\\{filePath}"));
+                    }
+                    else if (filePath.EndsWith(":") || filePath.EndsWith(".cpl") || filePath.EndsWith(".msc") || filePath.EndsWith(".ms-settings"))
+                    {
+                        icon = GetAppwizCplIcon(filePath);
+                        // icon = Icon.ExtractAssociatedIcon(Environment.ExpandEnvironmentVariables($"%SystemRoot%\\System32\\shell32.dll"));
+                    }
+                    else if (filePath == "desk.cpl")
+                    {
+                        icon = Icon.ExtractAssociatedIcon("control.exe");
+                    }
+                }
             }
             catch (Exception ex)
             {
             }
             return icon;
+        }
+
+        private Icon GetAppwizCplIcon(string fileName)
+        {
+            try
+            {
+                // 创建一个 SHFILEINFO 结构体
+                SHFILEINFO shfi = new SHFILEINFO();
+                // 获取 appwiz.cpl 文件的图标
+                IntPtr hIcon = SHGetFileInfo("C:\\Windows\\System32\\" + fileName, 0, ref shfi, (uint)Marshal.SizeOf(shfi), SHGFI_ICON | SHGFI_LARGEICON);
+                // 如果成功获取图标
+                if (hIcon != IntPtr.Zero)
+                {
+                    // 创建一个图标对象
+                    Icon icon = Icon.FromHandle(shfi.hIcon);
+                    return icon;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting appwiz.cpl file icon: {ex.Message}");
+                return null;
+            }
+        }
+
+        // SHGetFileInfo 函数参数常量
+        private const uint SHGFI_ICON = 0x000000100;
+
+        private const uint SHGFI_LARGEICON = 0x000000000;
+        private const uint SHGFI_SMALLICON = 0x000000001;
+
+        // SHGetFileInfo 函数声明
+        [DllImport("shell32.dll")]
+        private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
+
+        // SHFILEINFO 结构体
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        private struct SHFILEINFO
+        {
+            public IntPtr hIcon;
+            public int iIcon;
+            public uint dwAttributes;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szDisplayName;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string szTypeName;
         }
 
         #endregion Tool
