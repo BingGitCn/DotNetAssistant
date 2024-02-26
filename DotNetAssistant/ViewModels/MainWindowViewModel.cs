@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 
 namespace DotNetAssistant.ViewModels
 {
@@ -529,5 +530,30 @@ namespace DotNetAssistant.ViewModels
         }
 
         #endregion Tool
+
+        [RelayCommand]
+        private void ExitApp()
+        {
+            if (GlobalVars.ShowConfirm("确认退出软件？"))
+                Environment.Exit(0);
+        }
+
+        [RelayCommand]
+        private void Github()
+        {
+            try
+            {
+                string url = "https://github.com/BingGitCn/DotNetAssistant";
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("无法打开链接：" + ex.Message);
+            }
+        }
     }
 }

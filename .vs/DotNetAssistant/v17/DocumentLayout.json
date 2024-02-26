@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|f:\\work\\\u4EE3\u7801\\\u81EA\u5236\\dotnetassistant\\dotnetassistant\\views\\toolwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\views\\toolwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|f:\\work\\\u4EE3\u7801\\\u81EA\u5236\\dotnetassistant\\dotnetassistant\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -13,6 +13,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\viewmodels\\toolwinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\viewmodels\\toolwinviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\views\\toolwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\views\\toolwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\views\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\views\\codewin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\views\\codewin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|solutionrelative:dotnetassistant\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2005C0E-F724-4C58-A11C-BB59DC4117B9}|DotNetAssistant\\DotNetAssistant.csproj|F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\dotnetassistant\\views\\cropimagewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -80,7 +80,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 175,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,32 +102,31 @@
               "RelativeDocumentMoniker": "DotNetAssistant\\ViewModels\\ToolWinViewModel.cs",
               "ToolTip": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\ViewModels\\ToolWinViewModel.cs",
               "RelativeToolTip": "DotNetAssistant\\ViewModels\\ToolWinViewModel.cs",
-              "ViewState": "AQIAAIMAAAAAAAAAAAAiwIwAAAACAAAA",
+              "ViewState": "AQIAAIMAAAAAAAAAAAAswIwAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-22T09:29:47.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ToolWin.xaml",
               "DocumentMoniker": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\Views\\ToolWin.xaml",
               "RelativeDocumentMoniker": "DotNetAssistant\\Views\\ToolWin.xaml",
               "ToolTip": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\Views\\ToolWin.xaml",
               "RelativeToolTip": "DotNetAssistant\\Views\\ToolWin.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-02-23T09:24:18.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-23T09:24:18.889Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "MainWindowViewModel.cs",
               "DocumentMoniker": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\ViewModels\\MainWindowViewModel.cs",
               "RelativeDocumentMoniker": "DotNetAssistant\\ViewModels\\MainWindowViewModel.cs",
               "ToolTip": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\ViewModels\\MainWindowViewModel.cs",
               "RelativeToolTip": "DotNetAssistant\\ViewModels\\MainWindowViewModel.cs",
-              "ViewState": "AQIAAPAAAAAAAAAAAAAswAcBAAApAAAA",
+              "ViewState": "AQIAABECAAAAAAAAAAAswCYCAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-21T07:33:42.369Z",
               "EditorCaption": ""
@@ -146,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "GlobalVars.cs",
               "DocumentMoniker": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\ViewModels\\GlobalVars.cs",
               "RelativeDocumentMoniker": "DotNetAssistant\\ViewModels\\GlobalVars.cs",
@@ -154,24 +153,22 @@
               "RelativeToolTip": "DotNetAssistant\\ViewModels\\GlobalVars.cs",
               "ViewState": "AQIAADIAAAAAAAAAAAAQwD0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-21T09:09:12.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-21T09:09:12.191Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "CodeWin.xaml",
               "DocumentMoniker": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\Views\\CodeWin.xaml",
               "RelativeDocumentMoniker": "DotNetAssistant\\Views\\CodeWin.xaml",
               "ToolTip": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\Views\\CodeWin.xaml",
               "RelativeToolTip": "DotNetAssistant\\Views\\CodeWin.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-02-21T08:07:09.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-21T08:07:09.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "F:\\WORK\\\u4EE3\u7801\\\u81EA\u5236\\DotNetAssistant\\DotNetAssistant\\Views\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "DotNetAssistant\\Views\\MainWindow.xaml.cs",
@@ -179,8 +176,7 @@
               "RelativeToolTip": "DotNetAssistant\\Views\\MainWindow.xaml.cs",
               "ViewState": "AQIAABcAAAAAAAAAAAAywBoAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-21T09:03:42.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-21T09:03:42.837Z"
             },
             {
               "$type": "Document",

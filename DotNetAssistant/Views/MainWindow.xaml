@@ -12,6 +12,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     Closing="Window_Closing"
     WindowStartupLocation="CenterScreen">
+   
     <Window.Resources>
         <local:IconConverter x:Key="IconConverter1" />
         <Style
@@ -209,6 +210,14 @@
                 ItemsSource="{Binding Tags}" />
         </Grid>
 
-        <hc:NotifyIcon Text="{Binding Title}" Visibility="Visible" MouseDoubleClick="NotifyIcon_MouseDoubleClick" />
+        <hc:NotifyIcon Text="{Binding Title}" Visibility="Visible" MouseDoubleClick="NotifyIcon_MouseDoubleClick">
+            <hc:NotifyIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding GithubCommand}" Header="Github"/>
+                    <MenuItem Command="{Binding ExitAppCommand}" Header="退  出"/>
+                 
+                </ContextMenu>
+            </hc:NotifyIcon.ContextMenu>
+        </hc:NotifyIcon>
     </Grid>
 </Window>
