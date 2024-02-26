@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using DotNetAssistant.Views;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,23 @@ namespace DotNetAssistant.ViewModels
                 TopWinCrop();
             else
                 UnTopWinCrop();
+
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "RDPS"))
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "RDPS");
+
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "RDPList.json"))
+            {
+                RDPList.Clear();
+                RDPList.Add(new RDPData() { Name = "", Address = "" });
+                GlobalVars.WriteJson(RDPList, AppDomain.CurrentDomain.BaseDirectory + "RDPList.json");
+            }
+            else
+            {
+                RDPList.Clear();
+                RDPList = GlobalVars.ReadJson<ObservableCollection<RDPData>>(AppDomain.CurrentDomain.BaseDirectory + "RDPList.json");
+                if (RDPList.Count == 0)
+                    RDPList.Add(new RDPData() { Name = "", Address = "" });
+            }
         }
 
         [ObservableProperty]
@@ -100,5 +119,70 @@ namespace DotNetAssistant.ViewModels
 
             timer.Stop();
         }
+
+        #region RDP
+
+        [ObservableProperty]
+        private int selectRDPIndex = 0;
+
+        [ObservableProperty]
+        private ObservableCollection<RDPData> rDPList = new ObservableCollection<RDPData>();
+
+        [RelayCommand]
+        private void AddRDP()
+        {
+            RDPList.Add(new RDPData());
+            SaveRDP();
+        }
+
+        [RelayCommand]
+        private void DelRDP()
+        {
+            if (RDPList.Count == 1)
+            {
+                GlobalVars.ShowMessage("禁止删除最后一项。");
+                return;
+            }
+            if (GlobalVars.ShowConfirm("确认删除？"))
+                RDPList.RemoveAt(SelectRDPIndex);
+            SaveRDP();
+        }
+
+        [RelayCommand]
+        private void SaveRDP()
+        {
+            GlobalVars.WriteJson(RDPList, AppDomain.CurrentDomain.BaseDirectory + "RDPList.json");
+            RDPList.Clear();
+            RDPList = GlobalVars.ReadJson<ObservableCollection<RDPData>>(AppDomain.CurrentDomain.BaseDirectory + "RDPList.json");
+        }
+
+        [RelayCommand]
+        private void OpenRDP()
+        {
+            try
+            {
+                RDPData rd = RDPList[SelectRDPIndex];
+
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp"))
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp");
+
+                using (StreamWriter writer = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp"))
+                {
+                    writer.WriteLine("screen mode id:i:2");
+                    writer.WriteLine("full address:s:" + rd.Address);
+                }
+                GlobalVars.RunExe(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp");
+            }
+            catch { }
+        }
+
+        #endregion RDP
+    }
+
+    public class RDPData
+    {
+        public string Name { set; get; }
+
+        public string Address { set; get; }
     }
 }

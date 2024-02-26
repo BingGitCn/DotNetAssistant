@@ -2,6 +2,7 @@
     x:Class="DotNetAssistant.Views.ToolWin"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:i="https://handyorg.github.io/handycontrol"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
@@ -22,6 +23,53 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </CheckBox>
+            <DockPanel DockPanel.Dock="Top">
+                <ListBox
+                    Margin="5"
+                    ItemsSource="{Binding RDPList}"
+                    SelectedIndex="{Binding SelectRDPIndex}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Width="180"
+                                Height="100"
+                                Margin="5"
+                                Effect="{StaticResource EffectShadow5}"
+                                Style="{StaticResource BorderRegion}">
+                                <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                    <TextBox
+                                        Margin="5"
+                                        hc:InfoElement.Placeholder="请输入名称，右键保存"
+                                        Style="{StaticResource TextBoxExtend}"
+                                        Text="{Binding Name}" />
+                                    <TextBox
+                                        Margin="5"
+                                        hc:InfoElement.Placeholder="请输入远程IP，右键保存"
+                                        Style="{StaticResource TextBoxExtend}"
+                                        Text="{Binding Address}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding OpenRDPCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{Binding AddRDPCommand}" Header="添  加" />
+                            <MenuItem Command="{Binding SaveRDPCommand}" Header="保  存" />
+                            <MenuItem Command="{Binding DelRDPCommand}" Header="删  除" />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+            </DockPanel>
             <TextBlock DockPanel.Dock="Top" Visibility="Hidden" />
         </DockPanel>
     </Grid>

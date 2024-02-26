@@ -240,28 +240,31 @@ namespace DotNetAssistant.ViewModels
             }
         }
 
-        private bool isNeedToUpdateToolRegion = true;
+        private int lastSelectTabIndex = -1;
 
         [RelayCommand]
         private async Task UpdateToolRegion()
         {
             await Task.Delay(10);
 
-            if (SelectTabIndex == 1 && isNeedToUpdateToolRegion)
+            if (SelectTabIndex != lastSelectTabIndex)
             {
-                regionManager.Regions["ToolRegion"].RequestNavigate("CodeWin");
-                GlobalVars.SetCodesEventArgs.Publish("");
-                isNeedToUpdateToolRegion = false;
-                await Task.Delay(10);
-                SearchCode = "";
-                SearchStarted(SearchCode);
-            }
-            if (SelectTabIndex == 0)
-            {
-                isNeedToUpdateToolRegion = true;
-                regionManager.Regions["ToolRegion"].RequestNavigate("ToolWin");
-                await Task.Delay(10);
-                SearchCode = "";
+                lastSelectTabIndex = SelectTabIndex;
+                if (SelectTabIndex == 1)
+                {
+                    regionManager.Regions["ToolRegion"].RequestNavigate("CodeWin");
+                    GlobalVars.SetCodesEventArgs.Publish("");
+                    await Task.Delay(10);
+                    SearchCode = "";
+                    SearchStarted(SearchCode);
+                }
+                if (SelectTabIndex == 0)
+                {
+                    regionManager.Regions["ToolRegion"].RequestNavigate("ToolWin");
+                    await Task.Delay(10);
+                    SearchCode = "";
+                    SearchStarted(SearchCode);
+                }
             }
         }
 
