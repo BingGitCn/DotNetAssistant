@@ -211,7 +211,10 @@
                 ItemsSource="{Binding Tags}" />
         </Grid>
 
-        <hc:NotifyIcon Text="{Binding Title}" Visibility="Visible" MouseDoubleClick="NotifyIcon_MouseDoubleClick">
+        <hc:NotifyIcon
+            MouseDoubleClick="NotifyIcon_MouseDoubleClick"
+            Text="{Binding Title}"
+            Visibility="Visible">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding GithubCommand}" Header="Github" />

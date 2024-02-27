@@ -1,5 +1,13 @@
 [
   {
+    "Name": "wifi密码查看",
+    "IsCanDelete": false,
+    "Code": "",
+    "IDGuid": "f20255ca-26db-4865-b7ed-2f31f5179c4c",
+    "Count": 9.0,
+    "Tags": []
+  },
+  {
     "Name": "cmd",
     "IsCanDelete": false,
     "Code": "cmd.exe",

@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 
 namespace DotNetAssistant.ViewModels
 {
@@ -96,7 +97,11 @@ namespace DotNetAssistant.ViewModels
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "服务", Code = "services.msc" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "电源选项", Code = "powercfg.cpl" });
                 totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "屏幕分辨率", Code = " desk.cpl" });
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "wifi密码查看", Code = "" });
             }
+
+            if (totalToolList.Where(s => s.Name == "wifi密码查看").Count() == 0)
+                totalToolList.Add(new ToolCode() { IsCanDelete = false, Name = "wifi密码查看", Code = "" });
 
             for (int i = 0; i < totalToolList.Count; i++)
             {
@@ -326,15 +331,70 @@ namespace DotNetAssistant.ViewModels
             try
             {
                 foreach (ToolCode toolCode in totalToolList)
-                    if (toolCode.Code == ToolList[SelectToolIndex].Code)
+                    if (toolCode.Name == ToolList[SelectToolIndex].Name)
                     {
                         toolCode.Count++;
                         GlobalVars.WriteJson(totalToolList, AppDomain.CurrentDomain.BaseDirectory + "Tools.json");
 
                         break;
                     }
+                if (ToolList[SelectToolIndex].Name == "wifi密码查看")
+                {
+                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "wifi.txt"))
+                        File.Delete(AppDomain.CurrentDomain.BaseDirectory + "wifi.txt");
+                    StreamWriter writer = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "wifi.txt");
 
-                GlobalVars.RunExe(ToolList[SelectToolIndex].Code, "");
+                    // 执行 netsh 命令获取已连接 WiFi 的信息
+                    Process process = new Process();
+                    process.StartInfo.FileName = "netsh";
+                    process.StartInfo.Arguments = "wlan show profiles";
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+
+                    // 解析输出，提取 WiFi 名称
+                    MatchCollection matches = Regex.Matches(output, @"All User Profile\s*:\s*(.+)\r\n");
+                    if (matches.Count == 0) matches = Regex.Matches(output, @"所有用户配置文件\s*:\s*(.+)\r\n");
+
+                    foreach (Match match in matches)
+                    {
+                        string profileName = match.Groups[1].Value.Trim();
+
+                        // 获取 WiFi 密码
+                        Process passwordProcess = new Process();
+                        passwordProcess.StartInfo.FileName = "netsh";
+                        passwordProcess.StartInfo.Arguments = $"wlan show profile name=\"{profileName}\" key=clear";
+                        passwordProcess.StartInfo.RedirectStandardOutput = true;
+                        passwordProcess.StartInfo.UseShellExecute = false;
+                        passwordProcess.StartInfo.CreateNoWindow = true;
+                        passwordProcess.Start();
+
+                        string passwordOutput = passwordProcess.StandardOutput.ReadToEnd();
+                        passwordProcess.WaitForExit();
+
+                        {
+                            Match passwordMatch = Regex.Match(passwordOutput, @"Key Content\s*:\s*(.+)\r\n");
+                            string password = passwordMatch.Groups[1].Value.Trim();
+                            if (String.IsNullOrEmpty(password))
+                            {
+                                passwordMatch = Regex.Match(passwordOutput, @"关键内容\s*:\s*(.+)\r\n");
+                                password = passwordMatch.Groups[1].Value.Trim();
+                            }
+                            writer.WriteLine($"Wifi 名称：{profileName} ");
+                            writer.WriteLine($"Wifi 密码：{password}");
+                        }
+                    }
+                    writer.Close();
+                    writer.Dispose();
+                    GlobalVars.RunExe(AppDomain.CurrentDomain.BaseDirectory + "wifi.txt");
+                }
+                else
+
+                    GlobalVars.RunExe(ToolList[SelectToolIndex].Code, "");
             }
             catch { }
         }
