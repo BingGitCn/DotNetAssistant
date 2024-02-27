@@ -6,6 +6,9 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -39,6 +42,37 @@ namespace DotNetAssistant.ViewModels
                 if (RDPList.Count == 0)
                     RDPList.Add(new RDPData() { Name = "", Address = "" });
             }
+            _ = CheckConnect();
+        }
+
+        private async Task CheckConnect()
+        {
+            Ping pingSender = new Ping();
+            foreach (var rdp in RDPList)
+                rdp.IsConnect = -1;
+            foreach (var rdp in RDPList)
+            {
+                try
+                {
+                    PingReply reply = await pingSender.SendPingAsync(IPAddress.Parse(rdp.Address), 3000);
+
+                    if (reply.Status == IPStatus.Success)
+                        rdp.IsConnect = 1;
+                    else
+                        rdp.IsConnect = 0;
+                }
+                catch
+                {
+                    rdp.IsConnect = 0;
+                }
+            }
+            pingSender.Dispose();
+        }
+
+        [RelayCommand]
+        private async Task CheckRDP()
+        {
+            await CheckConnect();
         }
 
         [ObservableProperty]
@@ -163,6 +197,10 @@ namespace DotNetAssistant.ViewModels
             {
                 RDPData rd = RDPList[SelectRDPIndex];
 
+                if (!(rd.IsConnect == 1))
+                    if (!GlobalVars.ShowConfirm("当前远程主机连接失败，是否继续打开？"))
+                        return;
+
                 if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp"))
                     File.Delete(AppDomain.CurrentDomain.BaseDirectory + "RDPS\\" + rd.Name + ".rdp");
 
@@ -179,10 +217,16 @@ namespace DotNetAssistant.ViewModels
         #endregion RDP
     }
 
-    public class RDPData
+    public partial class RDPData : ObservableObject
     {
-        public string Name { set; get; }
+        [JsonIgnore]
+        [ObservableProperty]
+        private int isConnect = -1;
 
-        public string Address { set; get; }
+        [ObservableProperty]
+        private string name;
+
+        [ObservableProperty]
+        private string address;
     }
 }

@@ -4,9 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:i="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:DotNetAssistant.Views"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
-
+    <UserControl.Resources>
+        <local:IntToColorConverter x:Key="IntToColorConverter" />
+        <local:IntToStatusConverter x:Key="IntToStatusConverter" />
+    </UserControl.Resources>
     <Grid>
         <DockPanel LastChildFill="True">
             <CheckBox
@@ -41,18 +45,38 @@
                                 Margin="5"
                                 Effect="{StaticResource EffectShadow5}"
                                 Style="{StaticResource BorderRegion}">
-                                <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-                                    <TextBox
-                                        Margin="5"
-                                        hc:InfoElement.Placeholder="请输入名称，右键保存"
-                                        Style="{StaticResource TextBoxExtend}"
-                                        Text="{Binding Name}" />
-                                    <TextBox
-                                        Margin="5"
-                                        hc:InfoElement.Placeholder="请输入远程IP，右键保存"
-                                        Style="{StaticResource TextBoxExtend}"
-                                        Text="{Binding Address}" />
-                                </StackPanel>
+                                <DockPanel LastChildFill="True">
+                                    <Border
+                                        Width="30"
+                                        Background="{Binding IsConnect, Converter={StaticResource IntToColorConverter}, Mode=TwoWay}"
+                                        CornerRadius="4"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            Margin="3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="13"
+                                            Foreground="White"
+                                            Text="{Binding IsConnect, Converter={StaticResource IntToStatusConverter}}"
+                                            TextAlignment="Center"
+                                            TextWrapping="Wrap" />
+                                    </Border>
+                                    <StackPanel
+                                        VerticalAlignment="Center"
+                                        DockPanel.Dock="Left"
+                                        Orientation="Vertical">
+                                        <TextBox
+                                            Margin="5"
+                                            hc:InfoElement.Placeholder="请输入名称，右键保存"
+                                            Style="{StaticResource TextBoxExtend}"
+                                            Text="{Binding Name}" />
+                                        <TextBox
+                                            Margin="5"
+                                            hc:InfoElement.Placeholder="请输入远程IP，右键保存"
+                                            Style="{StaticResource TextBoxExtend}"
+                                            Text="{Binding Address}" />
+                                    </StackPanel>
+                                </DockPanel>
                             </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -63,7 +87,9 @@
                     </i:Interaction.Triggers>
                     <ListBox.ContextMenu>
                         <ContextMenu>
+                            <MenuItem Command="{Binding CheckRDPCommand}" Header="检查连接状态" />
                             <MenuItem Command="{Binding AddRDPCommand}" Header="添  加" />
+
                             <MenuItem Command="{Binding SaveRDPCommand}" Header="保  存" />
                             <MenuItem Command="{Binding DelRDPCommand}" Header="删  除" />
                         </ContextMenu>

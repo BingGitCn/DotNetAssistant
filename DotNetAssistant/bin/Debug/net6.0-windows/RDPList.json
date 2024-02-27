@@ -1,6 +1,12 @@
 [
   {
-    "Name": "",
-    "Address": ""
+    "IsConnect": 1,
+    "Name": "1",
+    "Address": "192.168.200.166"
+  },
+  {
+    "IsConnect": -1,
+    "Name": "2",
+    "Address": "192.168.100.166"
   }
 ]

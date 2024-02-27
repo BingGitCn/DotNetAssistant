@@ -61,7 +61,7 @@ namespace DotNetAssistant {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DotNetAssistant;V1.24.02.26;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DotNetAssistant;V1.24.02.27;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
