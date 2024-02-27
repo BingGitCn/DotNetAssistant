@@ -85,6 +85,8 @@ namespace DotNetAssistant.ViewModels
         public string Code { set; get; }
         public string IDGuid { set; get; } = Guid.NewGuid().ToString();
 
+        public double Count { set; get; } = 0;
+
         public ObservableCollection<TagData> Tags { set; get; } = new ObservableCollection<TagData>();
     }
 

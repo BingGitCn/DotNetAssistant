@@ -51,11 +51,11 @@ namespace DotNetAssistant.ViewModels
             this.regionManager = regionManager;
             GlobalVars.GetCodesEventArgs.Subscribe(GetCodes);
             init();
-
+            SortRateTool();
             _ = UpdateToolRegion();
         }
 
-        private async void init()
+        private void init()
         {
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "SystemConfig.json"))
             {
@@ -114,14 +114,11 @@ namespace DotNetAssistant.ViewModels
             totalSharpList.Clear();
             for (int i = 0; i < sharpJsonFiles.Length; i++)
             {
-                await Task.Run(() =>
+                try
                 {
-                    try
-                    {
-                        totalSharpList.Add(GlobalVars.ReadJson<ToolCode>(sharpJsonFiles[i]));
-                    }
-                    catch { }
-                });
+                    totalSharpList.Add(GlobalVars.ReadJson<ToolCode>(sharpJsonFiles[i]));
+                }
+                catch { }
             }
 
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "Tags.json"))
@@ -328,6 +325,15 @@ namespace DotNetAssistant.ViewModels
         {
             try
             {
+                foreach (ToolCode toolCode in totalToolList)
+                    if (toolCode.Code == ToolList[SelectToolIndex].Code)
+                    {
+                        toolCode.Count++;
+                        GlobalVars.WriteJson(totalToolList, AppDomain.CurrentDomain.BaseDirectory + "Tools.json");
+
+                        break;
+                    }
+
                 GlobalVars.RunExe(ToolList[SelectToolIndex].Code, "");
             }
             catch { }
@@ -404,6 +410,22 @@ namespace DotNetAssistant.ViewModels
             try
             {
                 var sort = totalToolList.OrderBy(x => x.Name).ToList();
+                totalToolList.Clear();
+                foreach (var item in sort)
+                    totalToolList.Add(item);
+
+                GlobalVars.WriteJson(totalToolList, AppDomain.CurrentDomain.BaseDirectory + "Tools.json");
+                init();
+            }
+            catch { }
+        }
+
+        [RelayCommand]
+        private void SortRateTool()
+        {
+            try
+            {
+                var sort = totalToolList.OrderByDescending(x => x.Count).ToList();
                 totalToolList.Clear();
                 foreach (var item in sort)
                     totalToolList.Add(item);

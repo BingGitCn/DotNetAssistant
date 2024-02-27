@@ -5,8 +5,8 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>dot_net.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>1.24.02.24</AssemblyVersion>
-    <FileVersion>1.24.02.24</FileVersion>
+    <AssemblyVersion>1.24.02.26</AssemblyVersion>
+    <FileVersion>1.24.02.26</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="dot_net.ico" />

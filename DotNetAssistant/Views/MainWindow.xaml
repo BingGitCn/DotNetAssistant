@@ -12,7 +12,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     Closing="Window_Closing"
     WindowStartupLocation="CenterScreen">
-   
+
     <Window.Resources>
         <local:IconConverter x:Key="IconConverter1" />
         <Style
@@ -93,7 +93,8 @@
                                 <ListBox.ContextMenu>
                                     <ContextMenu>
 
-                                        <MenuItem Command="{Binding SortToolCommand}" Header="排  序" />
+                                        <MenuItem Command="{Binding SortToolCommand}" Header="按名称排序" />
+                                        <MenuItem Command="{Binding SortRateToolCommand}" Header="按喜好排序" />
                                         <MenuItem Command="{Binding ReverseToolCommand}" Header="倒  序" />
                                         <MenuItem Command="{Binding RemoveToolCommand}" Header="清空无效" />
                                         <MenuItem Command="{Binding AddToolCommand}" Header="添  加" />
@@ -213,9 +214,8 @@
         <hc:NotifyIcon Text="{Binding Title}" Visibility="Visible" MouseDoubleClick="NotifyIcon_MouseDoubleClick">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding GithubCommand}" Header="Github"/>
-                    <MenuItem Command="{Binding ExitAppCommand}" Header="退  出"/>
-                 
+                    <MenuItem Command="{Binding GithubCommand}" Header="Github" />
+                    <MenuItem Command="{Binding ExitAppCommand}" Header="退  出" />
                 </ContextMenu>
             </hc:NotifyIcon.ContextMenu>
         </hc:NotifyIcon>
